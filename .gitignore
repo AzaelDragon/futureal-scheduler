@@ -46,3 +46,5 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 /database/seeds/UsersTableSeeder.php
+/public/webfonts/
+/public/css/
