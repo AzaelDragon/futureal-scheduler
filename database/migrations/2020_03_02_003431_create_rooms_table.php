@@ -17,6 +17,7 @@ class CreateRoomsTable extends Migration {
 
             $table -> bigIncrements('id');
             $table -> string('name');
+            $table -> string('building');
             $table -> unsignedBigInteger('user');
             $table -> timestamps();
 
