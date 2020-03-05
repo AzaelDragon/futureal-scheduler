@@ -12,11 +12,13 @@ class RoomsTableSeeder extends Seeder {
     public function run() {
 
         DB::table('rooms') -> insert([
-            'name' => 'Test Room A'
+            'name' => 'Test Room A',
+            'user' => 1
         ]);
 
         DB::table('rooms') -> insert([
-            'name' => 'Test Room B'
+            'name' => 'Test Room B',
+            'user' => 1
         ]);
 
     }

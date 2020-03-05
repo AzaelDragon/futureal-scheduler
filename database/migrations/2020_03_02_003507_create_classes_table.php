@@ -14,9 +14,14 @@ class CreateClassesTable extends Migration {
     public function up() {
 
         Schema::create('classes', function (Blueprint $table) {
+
             $table -> bigIncrements('id');
             $table -> string('name');
+            $table -> unsignedBigInteger('user');
             $table -> timestamps();
+
+            $table -> foreign('user') -> references('id') -> on('users');
+
         });
 
     }

@@ -12,11 +12,13 @@ class ClassesTableSeeder extends Seeder {
     public function run() {
 
         DB::table('classes') -> insert([
-            'name' => 'Test Class A'
+            'name' => 'Test Class A',
+            'user' => 1
         ]);
 
         DB::table('classes') -> insert([
-            'name' => 'Test Class B'
+            'name' => 'Test Class B',
+            'user' => 1
         ]);
 
     }
