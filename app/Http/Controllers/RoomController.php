@@ -1,0 +1,109 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Room;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Integer;
+
+class RoomController extends Controller {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index() {
+
+        $rooms = Room::where('user', Auth::user() -> id) -> orderBy('name', 'desc') -> get();
+        return response(view('rooms') -> with('rooms', $rooms), 200);
+
+    }
+
+    /**
+     * Display a listing of the resource filtered by the specified user.
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public static function indexByUser() {
+
+        $rooms = Room::where('user', Auth::user() -> id) -> orderBy('name', 'desc') -> get();
+        return $rooms;
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request) {
+
+        $rules = array(
+            'name' => 'required',
+            'building' => 'required'
+        );
+
+        $validator = Validator::make($request -> all(), $rules);
+
+        if ($validator -> fails()) {
+            return response('ERROR', 400);
+        }
+
+        $room = new Room();
+        $room -> name = $request -> input('name');
+        $room -> building = $request -> input('building');
+        $room -> user = Auth::user() -> id;
+        $room -> save();
+
+        return response('OK', 200);
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id) {
+
+        $rules = array(
+            'name' => 'required',
+            'building' => 'required'
+        );
+
+        $validator = Validator::make($request -> all(), $rules);
+
+        if ($validator -> fails()) {
+            return response('ERROR', 400);
+        }
+
+        $room = Room::find($id);
+        $room -> name = $request -> input('name');
+        $room -> building = $request -> input('building');
+        $room -> save();
+
+        return response('OK', 200);
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  Integer $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id) {
+
+        Room::destroy($id);
+        return response('OK', 200);
+
+    }
+
+}
