@@ -4,7 +4,7 @@
         <div class="container">
             <div class="navbar-wrapper">
                 <a class="navbar-brand" href="{{ route('welcome') }}">
-                    <i class="fas fa-calendar-exclamation"></i>
+                    <i class="fas fa-calendar-exclamation"></i>&nbsp;
                     @yield('title')
                 </a>
             </div>
@@ -22,18 +22,27 @@
                             Aplicación
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a href="{{ route('login') }}" class="nav-link">
-                            <i class="fas fa-fingerprint"></i>
-                            Iniciar sesión
-                        </a>
-                    </li>
+                    @auth
+                        <li class="nav-item ">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item ">
+                            <a href="{{ route('login') }}" class="nav-link">
+                                <i class="fas fa-fingerprint"></i>
+                                Iniciar sesión
+                            </a>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
     </nav>
     <div class="wrapper wrapper-full-page">
-        <div class="@yield('header-class')" style="background-image: url('@yield('header-image')">
+        <div class="@yield('header-class')" filter-color="@yield('filter-color')" style="background-image: url('@yield('header-image')'); background-size: cover; background-position: top center;">
             @yield('content')
             <footer class="footer">
                 <div class="container">
@@ -58,4 +67,10 @@
             </footer>
         </div>
     </div>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+@endsection
+@section('body-scripts')
+    @yield('scripts')
 @endsection
