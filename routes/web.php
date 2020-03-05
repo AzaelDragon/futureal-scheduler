@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index') -> name('home');
+
+Route::resource('rooms', 'RoomController') -> except(['create', 'show', 'edit']);
