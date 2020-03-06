@@ -16,10 +16,11 @@
     <body class="@yield('body-class')">
         @yield('body')
         <script src="{{ asset('js/core/jquery.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('js/plugins/moment.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('js/plugins/moment-es.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/core/popper.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('js/core/bootstrap-material-design.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js')}}" type="text/javascript"></script>
-        <script src="{{ asset('js/plugins/moment.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins/sweetalert2.js')}}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins/jquery.validate.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins/jquery.bootstrap-wizard.js')}}" type="text/javascript"></script>
