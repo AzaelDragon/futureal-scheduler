@@ -47,14 +47,20 @@
                             <p> Inicio </p>
                         </a>
                     </li>
+                    <li class="nav-item @if($active == 'buildings') active @endif">
+                        <a class="nav-link" href="{{ route('buildings.index') }}">
+                            <i class="fas fa-building"></i>
+                            <p> Mis edificios </p>
+                        </a>
+                    </li>
                     <li class="nav-item @if($active == 'rooms') active @endif">
                         <a class="nav-link" href="{{ route('rooms.index') }}">
                             <i class="fas fa-school"></i>
                             <p> Mis salones </p>
                         </a>
                     </li>
-                    <li class="nav-item @if($active == 'classes') active @endif">
-                        <a class="nav-link" href="#">
+                    <li class="nav-item @if($active == 'subjects') active @endif">
+                        <a class="nav-link" href="{{ route('subjects.index') }}">
                             <i class="fas fa-graduation-cap"></i>
                             <p> Mis materias </p>
                         </a>
