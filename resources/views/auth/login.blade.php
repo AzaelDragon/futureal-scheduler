@@ -13,7 +13,7 @@
             }, 700);
         });
     </script>
-    @error
+    @error('email')
         <script>
             Swal.fire({
                 title: '¡Oh, No!',
@@ -22,6 +22,16 @@
                 confirmButtonText: '¡Vale!'
             });
         </script>
+    @enderror
+    @error('password')
+    <script>
+        Swal.fire({
+            title: '¡Oh, No!',
+            text: 'Los datos introducidos parecen ser incorrectos.',
+            icon: 'error',
+            confirmButtonText: '¡Vale!'
+        });
+    </script>
     @enderror
 @endsection
 @section('content')
