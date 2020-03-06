@@ -24,3 +24,5 @@ Route::resource('rooms', 'RoomController') -> except(['create', 'show', 'edit'])
 Route::resource('buildings', 'BuildingController') -> except(['create', 'show', 'edit']);
 
 Route::resource('subjects', 'SubjectController') -> except(['create', 'show', 'edit']);
+
+Route::resource('schedules', 'ScheduleController') -> except(['create', 'show', 'edit']);

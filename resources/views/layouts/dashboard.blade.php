@@ -66,15 +66,9 @@
                         </a>
                     </li>
                     <li class="nav-item @if($active == 'schedules') active @endif">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('schedules.index') }}">
                             <i class="fas fa-chalkboard-teacher"></i>
                             <p> Mi agenda </p>
-                        </a>
-                    </li>
-                    <li class="nav-item @if($active == 'calendar') active @endif">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-calendar"></i>
-                            <p> Mi calendario </p>
                         </a>
                     </li>
                 </ul>
