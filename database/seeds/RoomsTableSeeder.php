@@ -13,13 +13,13 @@ class RoomsTableSeeder extends Seeder {
 
         DB::table('rooms') -> insert([
             'name' => 'Test Room A',
-            'building' => 'Building 1',
+            'building' => 1,
             'user' => 1
         ]);
 
         DB::table('rooms') -> insert([
             'name' => 'Test Room B',
-            'building' => 'Building 2',
+            'building' => 2,
             'user' => 1
         ]);
 

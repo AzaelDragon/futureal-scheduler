@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ClassesTableSeeder extends Seeder {
+class BuildingsTableSeeder extends Seeder {
 
     /**
      * Run the database seeds.
@@ -11,13 +11,13 @@ class ClassesTableSeeder extends Seeder {
      */
     public function run() {
 
-        DB::table('classes') -> insert([
-            'name' => 'Test Class A',
+        DB::table('buildings') -> insert([
+            'name' => 'Building 1',
             'user' => 1
         ]);
 
-        DB::table('classes') -> insert([
-            'name' => 'Test Class B',
+        DB::table('buildings') -> insert([
+            'name' => 'Building 2',
             'user' => 1
         ]);
 

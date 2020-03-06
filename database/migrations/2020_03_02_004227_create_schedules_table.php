@@ -18,13 +18,13 @@ class CreateSchedulesTable extends Migration {
             $table -> bigIncrements('id');
             $table -> date('date');
             $table -> unsignedBigInteger('block');
-            $table -> unsignedBigInteger('class');
+            $table -> unsignedBigInteger('subject');
             $table -> unsignedBigInteger('room');
             $table -> unsignedBigInteger('user');
             $table -> timestamps();
 
             $table -> foreign('block') -> references('id') -> on('blocks');
-            $table -> foreign('class') -> references('id') -> on('classes');
+            $table -> foreign('subject') -> references('id') -> on('subjects');
             $table -> foreign('room') -> references('id') -> on('rooms');
             $table -> foreign('user') -> references('id') -> on('users');
 
