@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Building;
 use App\Room;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -17,20 +18,21 @@ class RoomController extends Controller {
      */
     public function index() {
 
-        $rooms = Room::where('user', Auth::user() -> id) -> orderBy('name', 'desc') -> get();
-        return response(view('rooms') -> with('rooms', $rooms), 200);
+        $rooms = Room::where('user', Auth::user() -> id) -> orderBy('name', 'asc') -> get();
+        $buildings = Building::where('user', Auth::user() -> id) -> orderBy('id', 'asc') -> get();
+        return response(view('rooms') -> with(['rooms' => $rooms, 'buildings' => $buildings]), 200);
 
     }
 
     /**
-     * Display a listing of the resource filtered by the specified user.
-     * @param $id
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * Find the amount of registries associated to the authenticated user.
+     *
+     * @return int
      */
-    public static function indexByUser() {
+    public static function findAmount() {
 
         $rooms = Room::where('user', Auth::user() -> id) -> orderBy('name', 'desc') -> get();
-        return $rooms;
+        return count($rooms);
 
     }
 

@@ -26,27 +26,27 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                            <tr>
-                                                <th> Nombre </th>
-                                                <th> Edificio </th>
-                                                <th class="text-right"> Acciones </th>
-                                            </tr>
+                                        <tr>
+                                            <th> Nombre </th>
+                                            <th> Edificio </th>
+                                            <th class="text-right"> Acciones </th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($rooms as $room)
-                                                <tr>
-                                                    <td> {{ $room -> name }} </td>
-                                                    <td> {{ $room -> building }} </td>
-                                                    <td class="td-actions text-right">
-                                                        <button type="button" class="btn btn-info edit" style="display: inline-block" onclick="prepareEdit({{json_encode($room)}})" data-toggle="modal" data-target="#edit-modal">
-                                                            <i class="fas fa-pen" style="margin: 0 0.25em 0 0.25em"></i>
-                                                        </button>
-                                                        <button type="button" class="btn btn-danger" onclick="deleteEntry({{ $room -> id }})">
-                                                            <i class="fas fa-trash" style="margin: 0 0.25em 0 0.25em"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                        @foreach($rooms as $room)
+                                            <tr>
+                                                <td> {{ $room -> name }} </td>
+                                                <td> {{ $buildings -> find($room -> building) -> name }}</td>
+                                                <td class="td-actions text-right">
+                                                    <button type="button" class="btn btn-info edit" style="display: inline-block" onclick="prepareEdit({{json_encode($room)}})" data-toggle="modal" data-target="#edit-modal">
+                                                        <i class="fas fa-pen" style="margin: 0 0.25em 0 0.25em"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger" onclick="deleteEntry({{ $room -> id }})">
+                                                        <i class="fas fa-trash" style="margin: 0 0.25em 0 0.25em"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -59,7 +59,7 @@
                                     <h3> ¡Está un poco solitario por aquí! </h3>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <h4> Parece ser que no tienes ningún salón registrado. </h4>
+                                    <h4> Parece ser que no tienes ningún registro. </h4>
                                 </div>
                                 <br/>
                             @endif
@@ -73,7 +73,7 @@
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <button data-toggle="modal" data-target="#creation-modal" class="btn btn-round btn-primary">
-                                    <i class="fas fa-plus"></i> &nbsp; Crear uno nuevo
+                                    <i class="fas fa-plus"></i> &nbsp; Crear un nuevo registro
                                 </button>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                                     </div>
                                     <br/>
                                     <div class="row justify-content-center">
-                                        <h4> Crear un nuevo salón </h4>
+                                        <h4> Crear un nuevo registro </h4>
                                     </div>
                                     <div class="form-group">
                                         <label for="name" class="bmd-label-floating">
@@ -111,10 +111,11 @@
                                         <input id="name" name="name" type="text" class="form-control" value="{{ old('name') }}" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name" class="bmd-label-floating">
-                                            Edificio
-                                        </label>
-                                        <input id="building" name="building" type="text" class="form-control" value="{{ old('name') }}" required>
+                                        <select id="building" name="building" class="selectpicker" data-size="{{ count($buildings) }}" data-style="select-with-transition" title="Elije un edificio" required>
+                                            @foreach($buildings as $building)
+                                                <option value="{{ $building -> id }}"> {{ $building -> name }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <br/>
                                     <div class="row justify-content-center">
@@ -149,8 +150,9 @@
                                     </div>
                                     <br/>
                                     <div class="row justify-content-center">
-                                        <h4> Editar salón existente </h4>
+                                        <h4> Editar registro existente </h4>
                                     </div>
+                                    <br/>
                                     <div class="form-group">
                                         <label for="new-name" class="bmd-label-static">
                                             Nombre
@@ -158,10 +160,11 @@
                                         <input id="new-name" name="new-name" type="text" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="new-name" class="bmd-label-static">
-                                            Edificio
-                                        </label>
-                                        <input id="new-building" name="new-building" type="text" class="form-control" required>
+                                        <select id="new-building" name="new-building" class="selectpicker" data-size="{{ count($buildings) }}" data-style="select-with-transition" required>
+                                            @foreach($buildings as $building)
+                                                <option value="{{ $building -> id }}"> {{ $building -> name }} </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <br/>
                                     <div class="row justify-content-center">
@@ -189,7 +192,7 @@
     <script>
         function prepareEdit(data) {
             $('#new-name').val(data['name']);
-            $('#new-building').val(data['building']);
+            $('#new-building').selectpicker('val', data['building']);
             $('#edit-id').val(data['id']);
         };
         function editEntry() {
@@ -214,7 +217,7 @@
                 error: (_) => {
                     Swal.fire({
                         title: '¡Oh, No!',
-                        text: 'No se ha podido actualizar el registro.',
+                        text: 'No se ha podido actualizar el registro especificado.',
                         icon: 'error',
                         confirmButtonText: '¡Vale!'
                     });
@@ -242,7 +245,7 @@
                 error: (_) => {
                     Swal.fire({
                         title: '¡Oh, No!',
-                        text: 'No se ha podido crear el registro.',
+                        text: 'No se ha podido crear el registro especificado.',
                         icon: 'error',
                         confirmButtonText: '¡Vale!'
                     });
@@ -282,14 +285,4 @@
             })
         };
     </script>
-    @if (\Illuminate\Support\Facades\Session::has('creation'))
-        <script>
-            Swal.fire({
-                title: '¡Bien!',
-                text: 'Se ha creado un nuevo registro en la base de datos.',
-                icon: 'success',
-                confirmButtonText: '¡Perfecto!'
-            });
-        </script>
-    @endif
 @endsection
