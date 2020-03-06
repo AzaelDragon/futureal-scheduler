@@ -254,7 +254,7 @@
                         success: (_) => {
                             Swal.fire({
                                 title: '¡Bien!',
-                                text: 'Se ha eliminado el salón especificado.',
+                                text: 'Se ha eliminado el registro especificado.',
                                 icon: 'success',
                                 confirmButtonText: '¡Perfecto!'
                             }).then((_) => {
