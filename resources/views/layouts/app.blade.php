@@ -30,6 +30,7 @@
         <script src="{{ asset('js/plugins/bootstrap-tagsinput.js')}}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins/jasny-bootstrap.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins/fullcalendar.min.js')}}" type="text/javascript"></script>
+        <script src="{{ asset('js/plugins/fullcalendar-locales.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins/jquery-jvectormap.js')}}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins/nouislider.min.js')}}" type="text/javascript"></script>
         <script src="{{ asset('js/plugins/core.js')}}" type="text/javascript"></script>
