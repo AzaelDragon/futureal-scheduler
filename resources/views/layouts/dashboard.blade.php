@@ -302,5 +302,11 @@
             });
         });
     </script>
+    <script>
+        setTimeout(function() {
+            $('body').addClass('sidebar-mini');
+            md.misc.sidebar_mini_active = true;
+        }, 300);
+    </script>
     @yield('scripts')
 @endsection
