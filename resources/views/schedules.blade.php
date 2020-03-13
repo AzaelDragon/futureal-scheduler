@@ -37,7 +37,7 @@
                                         <tbody>
                                         @foreach($schedules as $schedule)
                                             <tr>
-                                                <td> {{ $schedule -> date }} </td>
+                                                <td> {{ \Carbon\Carbon::parse($schedule -> date) -> locale('es') -> isoFormat('LL') }} </td>
                                                 <td> {{ $blocks -> find($schedule -> block) -> name }} </td>
                                                 <td> {{ $rooms -> find($schedule -> room) -> name }}, {{ $buildings -> find($rooms -> find($schedule -> room) -> id) -> name }} </td>
                                                 <td> {{ $subjects -> find($schedule -> subject) -> name }}</td>
@@ -115,21 +115,21 @@
                                         </label>
                                         <input id="date" name="date" type="text" class="form-control datepicker" value="{{ now() -> day }}/{{ now() -> month }}/{{ now() -> year }}" required>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="row justify-content-center">
                                         <select id="block" name="block" class="selectpicker" data-size="{{ count($blocks) }}" data-style="select-with-transition" title="Elije un bloque de tiempo" required>
                                             @foreach($blocks as $block)
                                                 <option value="{{ $block -> id }}"> {{ $block -> name }} </option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="row justify-content-center">
                                         <select id="subject" name="subject" class="selectpicker" data-size="{{ count($subjects) }}" data-style="select-with-transition" title="Elije una materia" required>
                                             @foreach($subjects as $subject)
                                                 <option value="{{ $subject -> id }}"> {{ $subject -> name }} </option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="row justify-content-center">
                                         <select id="room" name="room" class="selectpicker" data-size="{{ count($rooms) }}" data-style="select-with-transition" title="Elije un salón" required>
                                             @foreach($rooms as $room)
                                                 <option value="{{ $room -> id }}"> {{ $room -> name }}, {{ $buildings -> find($room -> building) -> name }} </option>
@@ -137,7 +137,7 @@
                                         </select>
                                     </div>
                                     <br/>
-                                    <div class="form-group">
+                                    <div class="row justify-content-center">
                                         <button type="button" class="btn btn-fill btn-primary" onclick="createEntry();">
                                             <i class="fas fa-plus"></i> &nbsp; Crear
                                         </button>

@@ -26,3 +26,5 @@ Route::resource('buildings', 'BuildingController') -> except(['create', 'show', 
 Route::resource('subjects', 'SubjectController') -> except(['create', 'show', 'edit']);
 
 Route::resource('schedules', 'ScheduleController') -> except(['create', 'show', 'edit']);
+
+Route::get('/schedules/calendar', 'ScheduleController@calendar') -> name('schedules.calendar');
