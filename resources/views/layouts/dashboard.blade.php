@@ -24,8 +24,8 @@
                         </a>
                         <div class="collapse" id="user-collapse">
                             <ul class="nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
+                                <li class="nav-item @if($active == 'account') active @endif">
+                                    <a class="nav-link" href="{{ route('profile') }}">
                                         <span class="sidebar-mini"> <i class="fas fa-user-cog"></i> </span>
                                         <span class="sidebar-normal"> Mi cuenta </span>
                                     </a>
@@ -110,7 +110,7 @@
                                     </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
                                         Configuración de cuenta
                                     </a>
                                     <div class="dropdown-divider"></div>

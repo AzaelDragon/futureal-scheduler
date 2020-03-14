@@ -28,3 +28,8 @@ Route::resource('subjects', 'SubjectController') -> except(['create', 'show', 'e
 Route::resource('schedules', 'ScheduleController') -> except(['create', 'show', 'edit']);
 
 Route::get('/schedules/calendar', 'ScheduleController@calendar') -> name('schedules.calendar');
+
+Route::get('/my-profile', 'ProfileController@index') -> name('profile');
+Route::post('/profile/name', 'ProfileController@updateName') -> name('profile.name');
+Route::post('/profile/email', 'ProfileController@updateEmail') -> name('profile.email');
+Route::post('/profile/password', 'ProfileController@updatePassword') -> name('profile.password');
