@@ -148,6 +148,22 @@ class ScheduleController extends Controller {
             return response('ERROR', 400);
         }
 
+        $inputDate = $this -> americanize_date($request -> input('date'));
+        $inputBlock = $request -> input('block');
+
+        $queriedData = Schedule::where('date', $inputDate) -> get();
+        $overschedulingFlag = false;
+
+        foreach ($queriedData as $testEntry) {
+            if ($testEntry -> block == $inputBlock) {
+                $overschedulingFlag = true;
+            }
+        }
+
+        if ($overschedulingFlag) {
+            return response('OVERSCHEDULED', 400);
+        }
+
         $schedule = new Schedule();
         $schedule -> date = $this -> americanize_date($request -> input('date'));
         $schedule -> block = $request -> input('block');
@@ -180,6 +196,22 @@ class ScheduleController extends Controller {
 
         if ($validator -> fails()) {
             return response('ERROR', 400);
+        }
+
+        $inputDate = $this -> americanize_date($request -> input('date'));
+        $inputBlock = $request -> input('block');
+
+        $queriedData = Schedule::where('date', $inputDate) -> get();
+        $overschedulingFlag = false;
+
+        foreach ($queriedData as $testEntry) {
+            if ($testEntry -> block == $inputBlock) {
+                $overschedulingFlag = true;
+            }
+        }
+
+        if ($overschedulingFlag) {
+            return response('OVERSCHEDULED', 400);
         }
 
         $schedule = Schedule::find($id);

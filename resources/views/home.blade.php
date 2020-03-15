@@ -195,13 +195,22 @@
                         location.reload();
                     });
                 },
-                error: (_) => {
-                    Swal.fire({
-                        title: '¡Oh, No!',
-                        text: 'No se ha podido crear el registro especificado.',
-                        icon: 'error',
-                        confirmButtonText: '¡Vale!'
-                    });
+                error: (jqXHR) => {
+                    if (jqXHR.responseText === "OVERSCHEDULED") {
+                        Swal.fire({
+                            title: '¡Hey!',
+                            text: 'No puedes agendar una clase la misma hora y día que otra ya existente.',
+                            icon: 'warning',
+                            confirmButtonText: '¡Vale!'
+                        });
+                    } else {
+                        Swal.fire({
+                            title: '¡Oh, No!',
+                            text: 'No se ha podido crear el registro especificado.',
+                            icon: 'error',
+                            confirmButtonText: '¡Vale!'
+                        });
+                    }
                 }
             })
         }
